@@ -36,7 +36,6 @@ const StyledForm = styled.div`
   .form-items {
     padding-bottom: .9rem;
     padding-left: .9rem;
-    max-width: 30%;
     .error-message {
       color: red;
       font-size: .9rem;
@@ -46,6 +45,7 @@ const StyledForm = styled.div`
     label {
       display: flex;
       justify-content: space-between;
+      max-width: 30%;
     }
   }
 `;
@@ -53,7 +53,7 @@ export default function PizzaForm(props){
   const {values, submit, change, disabled, errors} = props;
 
   const onSubmit = evt => {
-    evt.preventDevault();
+    evt.preventDefault();
     submit();
   }
   const onChange = evt => {
@@ -78,7 +78,7 @@ export default function PizzaForm(props){
             <p>Required</p>
           </div>
           <div class="form-items">
-            <p class="error-message"></p>
+            <p class="error-message">{errors.name}</p>
             <input 
               id="name-input" 
               name="name"
@@ -91,7 +91,7 @@ export default function PizzaForm(props){
             <h4>Pizza Size</h4>
           </div>
           <div class="form-items">
-            <p class="error-message"></p>
+            <p class="error-message">{errors.size}</p>
             <select 
               id="size-dropdown"
               name="size"
