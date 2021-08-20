@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from "react";
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Link, Switch, Redirect } from 'react-router-dom';
 import * as yup from 'yup';
 import axios from 'axios';
 
 import MainPage from './components/MainPage';
 import PizzaForm from './components/PizzaForm';
+import Confirmation from './components/Confirmation';
 import schema from './validation/formSchema';
+
 
 const initialFormValues = {
   name: '',
@@ -26,11 +28,13 @@ const initialFormErrors = {
   instructions: ''
 }
 const initialDisabled = true;
+const initialRedirect = false;
 
 const App = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
+  const [redirect, setRedirect] = useState(false);
 
   const validate = (name, value) => {
     yup.reach(schema, name)
@@ -43,6 +47,11 @@ const App = () => {
     setFormValues({...formValues,[name]:value});
   }
   const formSubmit = () => {
+    axios.post('https://reqres.in/api/orders', formValues)
+      .then(res => {
+        setRedirect(true);
+      }).catch(err => console.error(err));
+    
     setFormValues(initialFormValues);
     setFormErrors(initialFormErrors);
   }
@@ -64,13 +73,16 @@ const App = () => {
       </div>
       <Switch>
         <Route path="/pizza">
-          <PizzaForm 
-            values={formValues}
-            change={inputChange}
-            submit={formSubmit}
-            disabled={disabled}
-            errors={formErrors}
-          />
+          { !redirect ?
+            <PizzaForm 
+              values={formValues}
+              change={inputChange}
+              submit={formSubmit}
+              disabled={disabled}
+              errors={formErrors}
+            /> :
+            <Confirmation />
+          }
         </Route>
         <Route path="/">
           <MainPage />
