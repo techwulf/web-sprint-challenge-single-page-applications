@@ -13,21 +13,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.header {
+.header-main {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
   border-bottom: 3px solid gray;
 }
-.header h1 {
+.header-main h1 {
   color: orangered;
   padding: 0 2rem;
 }
-.header nav {
+.header-main nav {
   padding: 0 2rem;
 }
-.header nav a {
+.header-main nav a {
   text-decoration: none;
   background-color: gray;
   color: black;
