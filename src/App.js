@@ -28,7 +28,6 @@ const initialFormErrors = {
   instructions: ''
 }
 const initialDisabled = true;
-const initialRedirect = false;
 
 const App = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
