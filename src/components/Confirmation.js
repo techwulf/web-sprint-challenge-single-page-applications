@@ -36,7 +36,7 @@ export default function Confirmation(props) {
   return (
     <>
     <HeaderStyled class="header-box">
-      <h2>Congrats! Your pizza is on it's way!!!'</h2>
+      <h2>Congrats! Your pizza is on it's way!!!</h2>
     </HeaderStyled>
     </>
   )
