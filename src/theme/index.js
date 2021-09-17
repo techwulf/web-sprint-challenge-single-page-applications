@@ -1,4 +1,6 @@
-export default {
+const theme = {
   white: 'white',
   black: 'black'
 }
+
+export default theme;
